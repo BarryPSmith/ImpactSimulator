@@ -1,0 +1,130 @@
+﻿{
+  "Scratch": [ 0.5, 1.0, 1.65, 2.0, 3.0, 5.0 ],
+  "DropHeights": [ 0.5, 1.0, 1.65, 2.0, 3.0, 5.0 ],
+  "WriteTraces": false,
+  "_ColumnFilters": [ "Offset", "Force" ],
+  "SetsToModel": [ 0, 1 ],
+  "ProtecteeModels": [ "VanToenTrunk" ],
+  "DefaultInclude": false,
+
+  "ProtectorModels": [
+    {
+      "ModelSet": 1,
+      "Name": "Hard Ground",
+      "ModelType": "SimpleSpring",
+      "Config": {
+        "SpringConstant": 1E7,
+        "Dampening": 1E3
+      }
+    },
+    {
+      "ModelSet": 1,
+      "include": true,
+      "Name": "Hard Plastic",
+      "ModelType": "CompositeParallel",
+      "Config": {
+        "Protectors": [
+          {
+            "ModelType": "ConstantForce",
+            "Config": {
+              "ForceConstant": 18.5E3,
+              "Cushion": 4E-3
+            }
+          },
+          {
+            "ModelType": "SimpleSpring",
+            "Config": {
+              "SpringConstant": 70E2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "ModelSet": 1,
+      "Name": "Plastic Deform",
+      "ModelType": "CompositeParallel",
+      "Config": {
+        "Protectors": [
+          {
+            "ModelType": "ConstantForce",
+            "Config": {
+              "ForceConstant": 8E3,
+              "Cushion": 10E-3
+            }
+          },
+          {
+            "ModelType": "SimpleSpring",
+            "Config": {
+              "SpringConstant": 70E3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "ModelSet": 1,
+      "Name": "Spring",
+      "ModelType": "SimpleSpring",
+      "Config": {
+        "SpringConstant": 300E3,
+        "Dampening": 1E3
+      }
+    },
+    {
+      "ModelSet": 1,
+      "include": false,
+      "Name": "Adiabat Piston",
+      "ModelType": "AdiabaticPiston",
+      "Config": {
+        "Area": 0.09,
+        "InitialHeight": 0.16,
+        "BulgingLength": 0.3,
+        "FabricStretchiness": 1.3E-6,
+        "FabricMemory": 10,
+        "Gamma": 1.4
+      }
+    },
+    {
+      "ModelSet": 1,
+      "include": false,
+      "Name": "Adiabat Piston2",
+      "ModelType": "BaffledAirProtector",
+      "Config": {
+        "Area": 0.09,
+        "InitialHeight": 0.25,
+        "HoleSize": 0,
+        "PistonThermalConductivity": 200
+      }
+    },
+    {
+      "ModelSet": 0,
+      "Name": "Baffled Air",
+      "ModelType": "BaffledAirProtector",
+      "Config": {
+        "Area": 0.09,
+        "InitialHeight": 0.2,
+        "HoleSize": 0.0004,
+        "BaffledVolume": 0.018
+      }
+    },
+    {
+      "ModelSet": 0,
+      "Name": "Compress Air",
+      "ModelType": "BaffledAirProtector",
+      "Config": {
+        "Area": 0.09,
+        "InitialHeight": 0.1,
+        "HoleSize": 0.0008,
+        "BaffledVolume": 0.018,
+        "InitialPressure": 150E3
+      }
+    },
+    {
+      "ModelSet": 0,
+      "Name": "Aerobean",
+      "ModelType": "Aerobean",
+      "Config": {}
+    }
+  ]
+}
